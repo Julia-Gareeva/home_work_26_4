@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+    container_name: api
+    image: uliagareeva/homework_26
+    ports:
+      - 80:80
+    volumes:
+      - ./docker_config.py:/code/default_config.py
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+
+  migrations:
+    build:
+      context: .
+    container_name: migrations
+    image: uliagareeva/homework_26
+    volumes:
+      - ./docker_config.py:/code/default_config.py
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: flask db upgrade
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      DB_USER: ulia
+      DB_PASSWORD: newrole
+      DB_NAME: my_database
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
