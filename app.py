@@ -30,6 +30,7 @@ app = create_app(Config())
 app.debug = True
 migrate = Migrate(app, db, render_as_batch=True)
 
+
 if __name__ == '__main__':
     # app.run(debug=True)
     app.run(host="localhost", port=80, debug=True)
