@@ -12,3 +12,4 @@ psycopg2-binary==2.9.5
 SQLAlchemy==1.4.44
 Werkzeug==2.2.2
 marshmallow~=3.19.0
+flask-restx~=1.0.3
