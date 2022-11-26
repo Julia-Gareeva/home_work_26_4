@@ -32,9 +32,9 @@ services:
     image: postgres:latest
     container_name: postgres
     environment:
-      DB_USER: ulia
-      DB_PASSWORD: newrole
-      DB_NAME: my_database
+      POSTGRES_USER: ulia
+      POSTGRES_PASSWORD: newrole
+      POSTGRES_DB: my_database
     volumes:
       - ./pg_data:/var/lib/postgresql/data
     healthcheck:
